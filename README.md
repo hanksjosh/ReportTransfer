@@ -1,6 +1,6 @@
 ReportTransfer is a tool for copying Sql Reporting Services Reports to a different server, or a different folder within the same server. 
 
-Executable can be dowloaded from: http://sdrv.ms/1i4TJh2
+Executable can be dowloaded from: https://skydrive.live.com/redir?resid=69D774D9604C3FB7!3554&authkey=!AN9GYh7L7DySeX4&ithint=folder%2c.exe
 
 Usage:
 To copy reports from an existig Reporting Services instance to a new location:
