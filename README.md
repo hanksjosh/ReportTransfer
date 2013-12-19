@@ -17,6 +17,6 @@ To copy reports from an existig Reporting Services instance to a new location:
 
 6. Enter the Folder that the reports will be copied to. If this folder does not exist, it will be created. Any reports already in this folder that match the name of a report being copied will be overwritten.
 
-7. Fill out the DataSource field. Once the reports are copied, the report will be pointed to the specified DataSource.
+7. Fill out the DataSource field. Once the reports are copied, the report will be pointed to the specified DataSource. This DataSource must already exist, because this tool will not create it.
 
 8. Click Copy Reports.
