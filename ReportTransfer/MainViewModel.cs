@@ -67,6 +67,36 @@ namespace ReportTransfer
 			}
 		}
 
+		public string SourceUserName
+		{
+			get { return _sourceUserName; }
+			set
+			{
+				_sourceUserName = value;
+				RaisePropertyChanged("SourceUserName");
+			}
+		}
+
+		public string SourcePassword
+		{
+			get { return _sourcePassword; }
+			set
+			{
+				_sourcePassword = value;
+				RaisePropertyChanged("SourcePassword");
+			}
+		}
+
+		public bool UseIntegratedSecurity
+		{
+			get { return _useIntegratedSecurity; }
+			set
+			{
+				_useIntegratedSecurity = value;
+				RaisePropertyChanged("UseIntegratedSecurity");
+			}
+		}
+
 		private RSCommunicator _communicator;
 		private string _sourceRootFolderName;
 		private string _destRootFolderName;
@@ -74,6 +104,9 @@ namespace ReportTransfer
 		private string _sourceUrl;
 		private string _destUrl;
 		private string _destDataSourceName;
+		private bool _useIntegratedSecurity;
+		private string _sourceUserName;
+		private string _sourcePassword;
 
 		public MainViewModel()
 		{
@@ -81,6 +114,7 @@ namespace ReportTransfer
 			SourceRootFolderName = "";
 			DestRootFolderName = "";
 			DestDataSourceName = "/Data Sources/DATASOURCE";
+			UseIntegratedSecurity = true;
 		}
 
 		public void GetSourceData()
@@ -88,7 +122,7 @@ namespace ReportTransfer
 
 			try
 			{
-				_communicator = new RSCommunicator(SourceUrl);
+				_communicator = new RSCommunicator(SourceUrl, SourceUserName, SourcePassword);
 				RSRepository repo = new RSRepository(_communicator, null);
 				SourceRootFolder = repo.GetExistingItems(SourceRootFolderName);
 			}
@@ -109,7 +143,7 @@ namespace ReportTransfer
 		{
 			try
 			{
-				RSRepository repo = new RSRepository(new RSCommunicator(SourceUrl), new RSCommunicator(DestUrl));
+				RSRepository repo = new RSRepository(new RSCommunicator(SourceUrl, SourceUserName, SourcePassword), new RSCommunicator(DestUrl));
 				repo.UploadReports(SourceRootFolder, DestRootFolderName, DestDataSourceName);
 			}
 			catch (Exception e)

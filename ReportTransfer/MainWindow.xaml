@@ -2,7 +2,12 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:reportTransfer="clr-namespace:ReportTransfer"
+        xmlns:converters="clr-namespace:ReportTransfer.Converters"
         Title="Report Transfer" Height="500" Width="750">
+	<Window.Resources>
+		<converters:InverseBooleanConverter x:Key="InverseBool"/>
+		<converters:BoolToVisibilityConverter x:Key="BoolToInVisibility" IsReversed="True" />
+	</Window.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
@@ -18,6 +23,33 @@
 			<TextBox Text="{Binding SourceUrl}"/>
 			<Label Content="Root folder"/>
 			<TextBox Text="{Binding SourceRootFolderName}"/>
+			<StackPanel>
+				<CheckBox Content="Integrated Security" IsChecked="{Binding UseIntegratedSecurity}"/>
+				<CheckBox Content="UserName and Password" IsChecked="{Binding Path=UseIntegratedSecurity, Converter={StaticResource InverseBool}}"/>
+			</StackPanel>
+			<Grid Visibility="{Binding UseIntegratedSecurity, Converter={StaticResource BoolToInVisibility}}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<TextBlock Text="User Name" Grid.Row="0" Grid.Column="0" Margin="5"/>
+				<TextBox Text="{Binding SourceUserName}"
+								 Grid.Row="1"
+								 Grid.Column="0"
+								 Margin="5" />
+				<TextBlock Text="Password"
+									 Grid.Row="0"
+									 Grid.Column="1"
+									 Margin="5" />
+				<TextBox Text="{Binding SourcePassword}"
+								 Grid.Row="1"
+								 Grid.Column="1"
+								 Margin="5" />
+			</Grid>
 			<StackPanel Orientation="Horizontal">
 				<Button Content="Get Reports" Click="ButtonBase_OnClick" Margin="0,10" Width="75"></Button>
 			</StackPanel>

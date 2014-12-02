@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Net;
 using ReportTransfer.ReportService;
 
 namespace ReportTransfer
@@ -8,12 +9,19 @@ namespace ReportTransfer
 	{
 		private ReportingService2005 _reportService;
 
-		public RSCommunicator(string url)
+		public RSCommunicator(string url, string userName = null, string password = null)
 		{
 			_reportService = new ReportingService2005();
 			_reportService.Url = url;
 			_reportService.PreAuthenticate = true;
-			_reportService.UseDefaultCredentials = true;
+			if (String.IsNullOrWhiteSpace(userName) || String.IsNullOrWhiteSpace(password))
+			{
+				_reportService.UseDefaultCredentials = true;
+			}
+			else
+			{
+				_reportService.Credentials = new NetworkCredential(userName, password);
+			}
 		}
 
 		public CatalogItem[] GetExistingReports(string folder)
