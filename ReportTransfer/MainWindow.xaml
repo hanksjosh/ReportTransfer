@@ -17,7 +17,7 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<StackPanel Grid.Column="0" Margin="15,10,5,10">
-			<TextBlock Text="Source Report Server" FontSize="16" FontWeight="Bold"></TextBlock>
+			<TextBlock Text="Source Report Server Rocks" FontSize="16" FontWeight="Bold"></TextBlock>
 			<Rectangle Height="2" Width="auto" Fill="DarkGray" Margin="0,0,0,2"></Rectangle>
 			<Label Content="ReportService Url"/>
 			<TextBox Text="{Binding SourceUrl}"/>
